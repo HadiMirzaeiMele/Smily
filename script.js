@@ -30,18 +30,20 @@
 var id = null;
 Move();
 var id = null;
+var pos = 0;
+var elem = document.getElementById("bubbleId");   
 function Move() {//you should get the screen height dynamically and change the direction when hit to earth happend
-  var elem = document.getElementById("bubbleId");   
-  var pos = 0;
   clearInterval(id);
   id = setInterval(frame, 10);
-  function frame() {
-    if (pos == 1000) {
-      clearInterval(id);
-    } else {
-      pos++; 
-      elem.style.top = pos + 'px'; 
-      elem.style.left = pos/100 + 'px'; 
-    }
+
+}
+
+function frame() {
+  if (pos == 500) {
+    clearInterval(id);
+  } else {
+    pos++; 
+    elem.style.top = pos + 'px'; 
+    elem.style.left = pos/2 + 'px'; 
   }
 }

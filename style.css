@@ -32,8 +32,8 @@ background:#000;
 	--blur2:6px;
   }
   /* @media screen and (min-width: 768px) {
-	--value: 60px;
-  } */
+	--width: 60px;
+  }  */
 /*
 bubble size :width 200px , height 200px for screen 500px *1200px
 small sircle size: top 50px, left 45px, width 30px , height 30px

@@ -13,7 +13,6 @@ align-items:center;
 min-height:100vh;
 background:#000;
 }
-
 :root {
 	--width: 100px;
 	--shadow1:12px;
@@ -31,9 +30,10 @@ background:#000;
 	--blur:4px;
 	--blur2:6px;
   }
-  /* @media screen and (min-width: 768px) {
-	--width: 60px;
-  }  */
+
+
+
+
 /*
 bubble size :width 200px , height 200px for screen 500px *1200px
 small sircle size: top 50px, left 45px, width 30px , height 30px

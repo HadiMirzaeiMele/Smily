@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body onload="startGame()">
-  <div>
+  <div id="background-wrap">
 <div  id ="bubbleId" class="bubble">
 <span></span>
 <span></span>
@@ -14,7 +14,18 @@
 <span></span>
 <span></span>
 </div>
-
+<div >
+  <div class="bubble x1"></div>
+  <div class="bubble x2"></div>
+  <div class="bubble x3"></div>
+  <div class="bubble x4"></div>
+  <div class="bubble x5"></div>
+  <div class="bubble x6"></div>
+  <div class="bubble x7"></div>
+  <div class="bubble x8"></div>
+  <div class="bubble x9"></div>
+  <div class="bubble x10"></div>
+</div>
  <div style="text-align:center;width:480px;">
   <button onmousedown="move('up')" onmouseup="clearmove()" ontouchstart="move('up')">UP</button><br><br>
   <button onmousedown="move('left')" onmouseup="clearmove()" ontouchstart="move('left')">LEFT</button>
@@ -25,3 +36,5 @@
 <script src="script.js" type="text/javascript"></script>
 </body>
 </html>
+
+

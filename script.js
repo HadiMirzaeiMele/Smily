@@ -3,8 +3,10 @@ var myBackground;
 var elem = document.getElementById("bubbleId");  
 var id = null;
 var id2 = null;
+
 var posY = 0;
 var posX = 0;
+
 var speedY=1;
 var speedX = 0;
 var  gravitySpeedY=0;
@@ -71,15 +73,18 @@ function ResponsiveAnimationFrame(){
 
 function move(dir) {
  // myGamePiece.image.src = "Resources/obj_0.gif";
+
   if (dir == "up") {speedY=-1; }
   if (dir == "down") {speedY = 1; }
   if (dir == "left") {speedX = -1; gravityX=-0.1;}
   if (dir == "right") {speedX = 1; gravityX=0.1;}
+
 }
 
 function clearmove() {
   
   speedY=1;
+
   if(speedX==1){//for inserthing speed
     speedX=0.2;
 
@@ -87,11 +92,13 @@ function clearmove() {
     speedX=-0.2;
   }
   gravityX=0.005;
-  gravitySpeedY=0;
+
+
 }
 
 
 function frame() {
+
 
     gravitySpeedY+=gravityY;
     gravitySpeedX+=gravityX;
@@ -100,12 +107,17 @@ function frame() {
     console.log(speedY+"\t"+posY +"\t"+currentHeight);
     elem.style.top = posY + 'px'; 
     elem.style.left =posX + 'px'; 
+
+ 
     hiTheButton();
 }
 function hiTheButton() {
 
+
   if (posY > currentHeight) {//670 the y position of the ground should be the real position of the browser buttons
     posY = currentHeight; 
+
+
 
       gravitySpeedY=-(gravitySpeedY*bounceBack);
    }  

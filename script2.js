@@ -19,8 +19,12 @@ var maxHeight1=600;
 
 var maxWidth2=700;
 var maxHeight2=800;
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+
+//document.getElementById("canvas").setAttribute("class","wide");
+//document.getElementById("background-wrap").setAttribute("style","display:block;cursor:pointer;cursor:hand;color:red;background:pink; width:500px;height:400px;");
+
+
+//var ctx = canvas.getContext("2d");
 window.onload = function() {
   startGame();
  }
@@ -35,11 +39,10 @@ function startGame() {
     clearInterval(id2);
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
 
-    
 // Add behind elements.
-ctx.globalCompositeOperation = 'destination-over'
-ctx.fillStyle = "blue";
-ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+//ctx.globalCompositeOperation = 'destination-over'
+//ctx.fillStyle = "blue";
+//ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
 }
 
@@ -118,11 +121,10 @@ function frame() {
     gravitySpeedX+=gravityX;
     posY+=speedY*gravitySpeedY;
     posX+=speedX*gravitySpeedX;
-    console.log(speedY+"\t"+posY +"\t"+currentHeight);
+   // console.log(speedY+"\t"+posY +"\t"+currentHeight);
     elem.style.top = posY + 'px'; 
     elem.style.left =posX + 'px'; 
 
- 
     hiTheButton();
 }
 function hiTheButton() {
@@ -139,35 +141,50 @@ function hiTheButton() {
 
 
 
+document.body.click( function(e) {
+  //the following works only for FF at the moment          
+  var range = window.getSelection().getRangeAt(0);
+  var pin = document.createElement('img');
+  pin.setAttribute('src','/Resources/obj_0.png');    
+  pin.setAttribute('class','pin');                                                                    
+  range.insertNode(pin);
+  console.log(range);
+});
 
 
+// function getCursorPosition(mainBody, event) {
 
-function getCursorPosition(canvas, event) {
-  const rect = canvas.getBoundingClientRect()
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
-  console.log("x: " + x + " y: " + y)
-}
-var mousePosition, holding;
+//   const rect = mainBody.getBoundingClientRect()
+//   const x = event.clientX - rect.left
+//   const y = event.clientY - rect.top
+  
+// }
+// var mousePosition, holding;
 
-function myInterval() {
-  var setIntervalId = setInterval(function() {
-    if (!holding) clearInterval(setIntervalId);
-    getCursorPosition(canvas, mousePosition);
-  }, 100); //set your wait time between consoles in milliseconds here
-}
-canvas.addEventListener('mousedown', function() {
-  holding = true;
-  myInterval();
-})
-canvas.addEventListener('mouseup', function() {
-  holding = false;
-  myInterval();
-})
-canvas.addEventListener('mouseleave', function() {
-  holding = false;
-  myInterval();
-})
-canvas.addEventListener('mousemove', function(e) {
-  mousePosition = e;
-})
+// function myInterval() {
+//   var setIntervalId = setInterval(function() {
+//     if (!holding) clearInterval(setIntervalId);
+//     getCursorPosition(document.body, mousePosition);
+//   }, 100); //set your wait time between consoles in milliseconds here
+
+//   var range = window.getSelection().getRangeAt(0);
+//   var pin = document.createElement('img');
+//   pin.setAttribute('src','/Resources/obj_0.png');    
+//   pin.setAttribute('class','pin');                                                                    
+//   range.insertNode(pin);
+// }
+// window.addEventListener('mousedown', function() {
+//   holding = true;
+//   myInterval();
+// })
+// window.addEventListener('mouseup', function() {
+//   holding = false;
+//   myInterval();
+// })
+// window.addEventListener('mouseleave', function() {
+//   holding = false;
+//   myInterval();
+// })
+// window.addEventListener('mousemove', function(e) {
+//   mousePosition = e;
+// })

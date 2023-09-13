@@ -30,7 +30,21 @@ background:#000;
 	--blur:4px;
 	--blur2:6px;
   }
+  .wide {
+    display:block;
+    width:1200px;
+	height: 1000px;
+	color: rebeccapurple;
+}
 
+.hide {
+    display:none;
+}
+
+.narrow {
+    display:block;
+    width:100px;
+}
 
 
 

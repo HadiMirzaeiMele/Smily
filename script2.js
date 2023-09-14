@@ -141,50 +141,38 @@ function hiTheButton() {
 
 
 
-document.body.click( function(e) {
-  //the following works only for FF at the moment          
-  var range = window.getSelection().getRangeAt(0);
-  var pin = document.createElement('img');
-  pin.setAttribute('src','/Resources/obj_0.png');    
-  pin.setAttribute('class','pin');                                                                    
-  range.insertNode(pin);
-  console.log(range);
+
+let isMouseDown = false;
+
+document.addEventListener('mousedown', (event) => {
+    if (event.button === 0) { // Check if it's the left mouse button (button code 0)
+        isMouseDown = true;
+        createDiv(event.clientX, event.clientY);
+    }
 });
 
+document.addEventListener('mouseup', () => {
+    isMouseDown = false;
+});
 
-// function getCursorPosition(mainBody, event) {
+document.addEventListener('mousemove', (event) => {
+    if (isMouseDown) {
+        createDiv(event.clientX, event.clientY);
+    }
+});
 
-//   const rect = mainBody.getBoundingClientRect()
-//   const x = event.clientX - rect.left
-//   const y = event.clientY - rect.top
-  
-// }
-// var mousePosition, holding;
+function createDiv(x, y) {
+    const div = document.createElement('div');
+    div.className = 'bubble';
+    div.style.left = x + 'px';
+    div.style.top = y + 'px';
+    document.body.appendChild(div);
 
-// function myInterval() {
-//   var setIntervalId = setInterval(function() {
-//     if (!holding) clearInterval(setIntervalId);
-//     getCursorPosition(document.body, mousePosition);
-//   }, 100); //set your wait time between consoles in milliseconds here
-
-//   var range = window.getSelection().getRangeAt(0);
-//   var pin = document.createElement('img');
-//   pin.setAttribute('src','/Resources/obj_0.png');    
-//   pin.setAttribute('class','pin');                                                                    
-//   range.insertNode(pin);
-// }
-// window.addEventListener('mousedown', function() {
-//   holding = true;
-//   myInterval();
-// })
-// window.addEventListener('mouseup', function() {
-//   holding = false;
-//   myInterval();
-// })
-// window.addEventListener('mouseleave', function() {
-//   holding = false;
-//   myInterval();
-// })
-// window.addEventListener('mousemove', function(e) {
-//   mousePosition = e;
-// })
+    setTimeout(() => {
+      div.classList.add("exploding-bubble");
+      div.classList.add("explode");
+      setTimeout(() => {
+          div.remove(); // Remove the exploded bubble
+      }, 5000); // Adjust the timing as needed
+  }, 5000);
+}

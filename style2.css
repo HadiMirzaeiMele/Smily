@@ -91,6 +91,33 @@ animation: animate 4s ease-in-out infinite;
 	  transform: scale(1);
 	}
   } 
+
+  @keyframes disappear {
+	to {
+		opacity: 0;
+		transform: scale(0);
+	}
+}
+
+
+.exploding-bubble  {
+	position: absolute;
+	width: var(--width);
+	height: var(--width);
+	background-color: rgba(255,255,255,0.25);
+	border-radius: 50%;
+	opacity: 1;
+	transform: scale(1);
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animation for the bubble */
+.explode {
+	transform: scale(3);
+	opacity: 0;
+}
+
+
 /* @keyframes animate {
 	 0%{
 		transform:translateY(100%);

@@ -45,7 +45,7 @@ function startGame() {
 //ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
 }
-
+var radius=100;
 function ResponsiveAnimationFrame(){
   var r = document.querySelector(':root');
 
@@ -59,6 +59,7 @@ function ResponsiveAnimationFrame(){
   currentHeight=y;
   if(x>maxWidth1) {
     currentHeight=y-120;
+    radius=100;
     r.style.setProperty('--width', '100px');
     r.style.setProperty('--shadow1', '12px');
     r.style.setProperty('--top1', '25px');
@@ -73,6 +74,7 @@ function ResponsiveAnimationFrame(){
     r.style.setProperty('--blur2', '6px');
   }else   if(x>maxWidth2 ){
     currentHeight=y-60;
+    radius=50;
     r.style.setProperty('--width', '50px');
     r.style.setProperty('--shadow1', '6px');
     r.style.setProperty('--top1', '12px');
@@ -128,13 +130,8 @@ function frame() {
     hiTheButton();
 }
 function hiTheButton() {
-
-
   if (posY > currentHeight) {//670 the y position of the ground should be the real position of the browser buttons
     posY = currentHeight; 
-
-
-
       gravitySpeedY=-(gravitySpeedY*bounceBack);
    }  
 }
@@ -147,7 +144,10 @@ let isMouseDown = false;
 document.addEventListener('mousedown', (event) => {
     if (event.button === 0) { // Check if it's the left mouse button (button code 0)
         isMouseDown = true;
-        createDiv(event.clientX, event.clientY);
+       const bubbleObj = new Bubble(event.clientX, event.clientY);
+       bubbleObj.draw();
+       listOfBubbles.push(bubbleObj);
+
     }
 });
 
@@ -157,9 +157,60 @@ document.addEventListener('mouseup', () => {
 
 document.addEventListener('mousemove', (event) => {
     if (isMouseDown) {
-        createDiv(event.clientX, event.clientY);
+        const bubbleObj = new Bubble(event.clientX, event.clientY,radius);
+        
+        if(adjustBubbles(listOfBubbles,bubbleObj)){
+          bubbleObj.draw();
+          listOfBubbles.push(bubbleObj);
+        }
     }
 });
+var listOfBubbles = [];
+var listOfAcceptedBubbles = [];
+function adjustBubbles(listOfBubbles,newBubble) {
+  if(listOfBubbles.length==0)return true;
+  var intersect=false;
+   for (var i = 0; i < listOfBubbles.length; i++) {
+    if(i==0 )
+    {
+
+    }else{
+      if((check4Intersection(listOfBubbles[i],newBubble))>0){
+      
+
+      }else{
+        intersect=true;
+      }
+
+    }
+   }
+   return !intersect;
+}
+function check4Intersection(bubbl1,bubble2){
+  var c1c2=Math.sqrt( Math.pow(bubbl1.center_x-bubble2.center_x,2) + Math.pow(bubbl1.center_y-bubble2.center_y,2));
+ // console.log(c1c2);
+  if(c1c2<radius){
+
+    return -1; //intersect
+  }else if(c1c2>radius){
+    return 1;//disjoint
+  }else {
+    return -2;
+
+  }
+  return false;
+}
+
+function removeFromList(listOfBubbles,bubble){
+  var remvedIndex=-1;
+  for (var i = 0; i < listOfBubbles.length; i++) {
+    if(listOfBubbles[i].center_x==bubble.center_x && listOfBubbles[i].center_y==bubble.center_y && listOfBubbles[i].radius==bubble.radius){
+      remvedIndex=i;
+    }
+  }
+  listOfBubbles.splice(remvedIndex, 1);
+  console.log(remvedIndex);
+}
 
 function createDiv(x, y) {
     const div = document.createElement('div');
@@ -177,3 +228,27 @@ function createDiv(x, y) {
   }, 5000);
 }
 
+
+
+class Bubble{
+constructor(center_x,center_y,radius){
+  this.center_x = center_x;
+  this.center_y = center_y;
+  this.radius = radius;
+}
+draw(){
+  const div = document.createElement('div');
+  div.className = 'bubble';
+  div.style.left = this.center_x + 'px';
+  div.style.top =  this.center_y + 'px';
+  document.body.appendChild(div);
+  setTimeout(() => {
+    div.classList.add("exploding-bubble");
+    div.classList.add("explode");
+    setTimeout(() => {
+        div.remove(); // Remove the exploded bubble
+        removeFromList(listOfBubbles,this);
+    }, 1000); // Adjust the timing as needed
+}, 1000);
+}
+}

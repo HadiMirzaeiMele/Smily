@@ -239,6 +239,7 @@ constructor(center_x,center_y,radius){
 draw(){
   const div = document.createElement('div');
   div.className = 'bubble';
+  div.classList.add("x0");
   div.style.left = this.center_x + 'px';
   div.style.top =  this.center_y + 'px';
   document.body.appendChild(div);
@@ -248,7 +249,7 @@ draw(){
     setTimeout(() => {
         div.remove(); // Remove the exploded bubble
         removeFromList(listOfBubbles,this);
-    }, 1000); // Adjust the timing as needed
-}, 1000);
+    }, 5000); // Adjust the timing as needed
+}, 5000);
 }
 }

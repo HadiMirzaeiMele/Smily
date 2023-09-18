@@ -257,7 +257,45 @@ animation: animate 4s ease-in-out infinite;
     }
 }
 
+@-webkit-keyframes animateBubble0 {
+    0% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -100%;
+    }
+}
 
+@-moz-keyframes animateBubble0 {
+    0% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -100%;
+    }
+}
+
+@keyframes animateBubble0 {
+    0% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -100%;
+    }
+}
+
+.x0 {
+    -webkit-animation0: animateBubble0 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+	-moz-animation0: animateBubble0 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+	animation: animateBubble0 25s linear infinite, sideWays 2s ease-in-out infinite alternate;
+	
+	/* left: -5%;
+	top: 5%; */
+	
+	-webkit-transform: scale(0.6);
+	-moz-transform: scale(0.6);
+	transform: scale(0.6);
+}
 
 .x1 {
     -webkit-animation: animateBubble 25s linear infinite, sideWays 2s ease-in-out infinite alternate;

@@ -3,6 +3,7 @@ var myBackground;
 var elem = document.getElementById("bubbleId");  
 var id = null;
 var id2 = null;
+var id3 = null;
 
 var posY = 0;
 var posX = 0;
@@ -38,7 +39,7 @@ function startGame() {
     id = setInterval(frame, 30);
     clearInterval(id2);
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
-
+    myBackgroundMacker0();
 // Add behind elements.
 //ctx.globalCompositeOperation = 'destination-over'
 //ctx.fillStyle = "blue";
@@ -128,6 +129,7 @@ function frame() {
     elem.style.left =posX + 'px'; 
 
     hiTheButton();
+
 }
 function hiTheButton() {
   if (posY > currentHeight) {//670 the y position of the ground should be the real position of the browser buttons
@@ -136,9 +138,21 @@ function hiTheButton() {
    }  
 }
 
+function collistion(){
 
+}
+function myBackgroundMacker0(){
+  
+  const bubbleObj = new Bubble(0,0);
+  bubbleObj.drawOthers();
 
+  id3 = setInterval(myBackgroundMacker, 5000);
+}
 
+function myBackgroundMacker(){
+  const bubbleObj = new Bubble(0,0);
+  bubbleObj.drawOthers();
+}
 let isMouseDown = false;
 
 document.addEventListener('mousedown', (event) => {
@@ -163,6 +177,8 @@ document.addEventListener('mousemove', (event) => {
           bubbleObj.draw();
           listOfBubbles.push(bubbleObj);
         }
+
+     
     }
 });
 var listOfBubbles = [];
@@ -228,7 +244,7 @@ function createDiv(x, y) {
   }, 5000);
 }
 
-
+var numberOfBubbles = 10;
 
 class Bubble{
 constructor(center_x,center_y,radius){
@@ -252,4 +268,22 @@ draw(){
     }, 5000); // Adjust the timing as needed
 }, 5000);
 }
+
+drawOthers(){
+  for(let i = 1; i<=2;i++){
+  const div = document.createElement('div');
+  div.className = 'bubble';
+  div.classList.add("x"+i);
+  var rnd1=Math.floor(Math.random() * 2000);
+  var rnd2=Math.floor(Math.random() * 2000);
+  var left=Math.floor(Math.random() * rnd1);
+  var top=Math.floor(Math.random() * rnd2);
+  div.style.left = Math.floor(Math.random() * left)+ 'px';
+ // div.style.top =  Math.floor(Math.random() * top) + 'px';
+  document.body.appendChild(div);
+  }
 }
+}
+
+
+

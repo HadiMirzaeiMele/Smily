@@ -151,7 +151,10 @@ function myBackgroundMacker0(){
 
 function myBackgroundMacker(){
   const bubbleObj = new Bubble(0,0);
-  bubbleObj.drawOthers();
+  for(var i =0;i<numberOfBubbles;i++){
+    bubbleObj.draw(i);
+
+  }
 }
 let isMouseDown = false;
 
@@ -159,9 +162,8 @@ document.addEventListener('mousedown', (event) => {
     if (event.button === 0) { // Check if it's the left mouse button (button code 0)
         isMouseDown = true;
        const bubbleObj = new Bubble(event.clientX, event.clientY);
-       bubbleObj.draw();
+       bubbleObj.draw(0);
        listOfBubbles.push(bubbleObj);
-
     }
 });
 
@@ -174,7 +176,7 @@ document.addEventListener('mousemove', (event) => {
         const bubbleObj = new Bubble(event.clientX, event.clientY,radius);
         
         if(adjustBubbles(listOfBubbles,bubbleObj)){
-          bubbleObj.draw();
+          bubbleObj.draw(0);
           listOfBubbles.push(bubbleObj);
         }
 
@@ -247,15 +249,16 @@ function createDiv(x, y) {
 var numberOfBubbles = 10;
 
 class Bubble{
-constructor(center_x,center_y,radius){
+constructor(center_x,center_y,radius,type){
   this.center_x = center_x;
   this.center_y = center_y;
   this.radius = radius;
+  this.type = type;
 }
-draw(){
+draw(type){
   const div = document.createElement('div');
   div.className = 'bubble';
-  div.classList.add("x0");
+  div.classList.add("x"+type);
   div.style.left = this.center_x + 'px';
   div.style.top =  this.center_y + 'px';
   document.body.appendChild(div);
@@ -269,20 +272,20 @@ draw(){
 }, 5000);
 }
 
-drawOthers(){
-  for(let i = 1; i<=2;i++){
-  const div = document.createElement('div');
-  div.className = 'bubble';
-  div.classList.add("x"+i);
-  var rnd1=Math.floor(Math.random() * 2000);
-  var rnd2=Math.floor(Math.random() * 2000);
-  var left=Math.floor(Math.random() * rnd1);
-  var top=Math.floor(Math.random() * rnd2);
-  div.style.left = Math.floor(Math.random() * left)+ 'px';
- // div.style.top =  Math.floor(Math.random() * top) + 'px';
-  document.body.appendChild(div);
-  }
-}
+// drawOthers(){
+//   for(let i = 1; i<=2;i++){
+//   const div = document.createElement('div');
+//   div.className = 'bubble';
+//   div.classList.add("x"+i);
+//   var rnd1=Math.floor(Math.random() * 2000);
+//   var rnd2=Math.floor(Math.random() * 2000);
+//   var left=Math.floor(Math.random() * rnd1);
+//   var top=Math.floor(Math.random() * rnd2);
+//   div.style.left = Math.floor(Math.random() * left)+ 'px';
+//  // div.style.top =  Math.floor(Math.random() * top) + 'px';
+//   document.body.appendChild(div);
+//   }
+// }
 }
 
 

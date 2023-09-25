@@ -111,8 +111,6 @@ function clearmove() {
 
 
 function frame() {
-
-
     gravitySpeedY+=gravityY;
     gravitySpeedX+=gravityX;
     posY+=speedY*gravitySpeedY;
@@ -136,14 +134,13 @@ function collistion(){
 }
 function myBackgroundMacker0(){
   
-  const bubbleObj = new Bubble(0,0);
-  bubbleObj.drawOthers();
-
+  const bubbleObj = new Bubble(100,500);
+  bubbleObj.draw(0);
   id3 = setInterval(myBackgroundMacker, 5000);
 }
 
 function myBackgroundMacker(){
-  const bubbleObj = new Bubble(0,0);
+  const bubbleObj = new Bubble(500,500);
   for(var i =0;i<numberOfBubbles;i++){
     bubbleObj.draw(i);
 
@@ -171,9 +168,7 @@ document.addEventListener('mousemove', (event) => {
         if(adjustBubbles(listOfBubbles,bubbleObj)){
           bubbleObj.draw(0);
           listOfBubbles.push(bubbleObj);
-        }
-
-     
+        }   
     }
 });
 var listOfBubbles = [];
@@ -182,8 +177,7 @@ function adjustBubbles(listOfBubbles,newBubble) {
   if(listOfBubbles.length==0)return true;
   var intersect=false;
    for (var i = 0; i < listOfBubbles.length; i++) {
-    if(i==0 )
-    {
+    if(i==0){
 
     }else{
       if((check4Intersection(listOfBubbles[i],newBubble))>0){
@@ -201,7 +195,6 @@ function check4Intersection(bubbl1,bubble2){
   var c1c2=Math.sqrt( Math.pow(bubbl1.center_x-bubble2.center_x,2) + Math.pow(bubbl1.center_y-bubble2.center_y,2));
  // console.log(c1c2);
   if(c1c2<radius){
-
     return -1; //intersect
   }else if(c1c2>radius){
     return 1;//disjoint
@@ -223,21 +216,7 @@ function removeFromList(listOfBubbles,bubble){
   console.log(remvedIndex);
 }
 
-function createDiv(x, y) {
-    const div = document.createElement('div');
-    div.className = 'bubble';
-    div.style.left = x + 'px';
-    div.style.top = y + 'px';
-    document.body.appendChild(div);
 
-    setTimeout(() => {
-      div.classList.add("exploding-bubble");
-      div.classList.add("explode");
-      setTimeout(() => {
-          div.remove(); // Remove the exploded bubble
-      }, 5000); // Adjust the timing as needed
-  }, 5000);
-}
 
 var numberOfBubbles = 10;
 
@@ -264,8 +243,6 @@ draw(type){
     }, 5000); // Adjust the timing as needed
 }, 5000);
 }
-
-
 }
 
 

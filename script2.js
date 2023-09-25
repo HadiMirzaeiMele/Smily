@@ -21,11 +21,7 @@ var maxHeight1=600;
 var maxWidth2=700;
 var maxHeight2=800;
 
-//document.getElementById("canvas").setAttribute("class","wide");
-//document.getElementById("background-wrap").setAttribute("style","display:block;cursor:pointer;cursor:hand;color:red;background:pink; width:500px;height:400px;");
 
-
-//var ctx = canvas.getContext("2d");
 window.onload = function() {
   startGame();
  }
@@ -40,10 +36,7 @@ function startGame() {
     clearInterval(id2);
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
     myBackgroundMacker0();
-// Add behind elements.
-//ctx.globalCompositeOperation = 'destination-over'
-//ctx.fillStyle = "blue";
-//ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
 
 }
 var radius=100;
@@ -272,20 +265,7 @@ draw(type){
 }, 5000);
 }
 
-// drawOthers(){
-//   for(let i = 1; i<=2;i++){
-//   const div = document.createElement('div');
-//   div.className = 'bubble';
-//   div.classList.add("x"+i);
-//   var rnd1=Math.floor(Math.random() * 2000);
-//   var rnd2=Math.floor(Math.random() * 2000);
-//   var left=Math.floor(Math.random() * rnd1);
-//   var top=Math.floor(Math.random() * rnd2);
-//   div.style.left = Math.floor(Math.random() * left)+ 'px';
-//  // div.style.top =  Math.floor(Math.random() * top) + 'px';
-//   document.body.appendChild(div);
-//   }
-// }
+
 }
 
 

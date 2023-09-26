@@ -120,6 +120,7 @@ function frame() {
     elem.style.left =posX + 'px'; 
 
     hiTheButton();
+    hitTheTop();
 
 }
 function hiTheButton() {
@@ -128,9 +129,30 @@ function hiTheButton() {
       gravitySpeedY=-(gravitySpeedY*bounceBack);
    }  
 }
+function hitTheTop(){
+  
+}
 
 function collistion(){
+  var collision=false;
+  var center_x,center_y;
+  for (var i = 0; i < listOfBubbles.length; i++) {
+    for (var j = 0; j < listOfBubbles.length; j++) {
+      if((check4Intersection(listOfBubbles[j],listOfBubbles[i]))>0){
 
+      }else{
+        collision=true;
+        center_x=listOfBubbles[j].center_x;
+        center_y=listOfBubbles[j].center_y;
+        break;
+      }
+    }
+    if(collision) break;
+  }
+  if(collision){
+    div.id=this.center_x +this.center_y+"";
+  }
+  
 }
 function myBackgroundMacker0(){
   
@@ -194,9 +216,10 @@ function adjustBubbles(listOfBubbles,newBubble) {
 function check4Intersection(bubbl1,bubble2){
   var c1c2=Math.sqrt( Math.pow(bubbl1.center_x-bubble2.center_x,2) + Math.pow(bubbl1.center_y-bubble2.center_y,2));
  // console.log(c1c2);
-  if(c1c2<radius){
+ var radiusTmp=30; //radius should be calculated from its center point
+  if(c1c2<radiusTmp){
     return -1; //intersect
-  }else if(c1c2>radius){
+  }else if(c1c2>radiusTmp){
     return 1;//disjoint
   }else {
     return -2;
@@ -219,7 +242,7 @@ function removeFromList(listOfBubbles,bubble){
 
 
 var numberOfBubbles = 10;
-
+var isBubbleExplodedByHisOwn=false;
 class Bubble{
 constructor(center_x,center_y,radius,type){
   this.center_x = center_x;
@@ -227,13 +250,18 @@ constructor(center_x,center_y,radius,type){
   this.radius = radius;
   this.type = type;
 }
+
 draw(type){
   const div = document.createElement('div');
+  div.id=this.center_x +this.center_y+"";
   div.className = 'bubble';
   div.classList.add("x"+type);
   div.style.left = this.center_x + 'px';
   div.style.top =  this.center_y + 'px';
   document.body.appendChild(div);
+  if(isBubbleExplodedByHisOwn){
+
+  
   setTimeout(() => {
     div.classList.add("exploding-bubble");
     div.classList.add("explode");
@@ -242,6 +270,8 @@ draw(type){
         removeFromList(listOfBubbles,this);
     }, 5000); // Adjust the timing as needed
 }, 5000);
+
+  }
 }
 }
 

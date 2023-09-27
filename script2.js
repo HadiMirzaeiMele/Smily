@@ -156,26 +156,39 @@ function collistion(){
 }
 function myBackgroundMacker0(){
   
-  const bubbleObj = new Bubble(100,500);
+  var bubbleObj = new Bubble(100,500);
   bubbleObj.draw(0);
   id3 = setInterval(myBackgroundMacker, 5000);
 }
 
 function myBackgroundMacker(){
-  const bubbleObj = new Bubble(500,500);
-  for(var i =0;i<numberOfBubbles;i++){
-    bubbleObj.draw(i);
 
+  for(var i =1;i<numberOfBubbles;i++){
+    var center_x;
+    sleep(200).then(() => { 
+      
+       center_x=Math.floor(Math.random() * 1000); });
+    
+    sleep(200).then(() => { 
+      
+    var center_y=Math.floor(Math.random() * 1000);
+     var bubbleObj = new Bubble(center_x,center_y);
+      bubbleObj.draw(i); });
+    }
   }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 let isMouseDown = false;
 
 document.addEventListener('mousedown', (event) => {
     if (event.button === 0) { // Check if it's the left mouse button (button code 0)
         isMouseDown = true;
-       const bubbleObj = new Bubble(event.clientX, event.clientY);
+       var bubbleObj = new Bubble(event.clientX, event.clientY);
        bubbleObj.draw(0);
        listOfBubbles.push(bubbleObj);
+  
     }
 });
 
@@ -190,7 +203,9 @@ document.addEventListener('mousemove', (event) => {
         if(adjustBubbles(listOfBubbles,bubbleObj)){
           bubbleObj.draw(0);
           listOfBubbles.push(bubbleObj);
-        }   
+     
+        } 
+
     }
 });
 var listOfBubbles = [];
@@ -261,7 +276,6 @@ draw(type){
   document.body.appendChild(div);
   if(isBubbleExplodedByHisOwn){
 
-  
   setTimeout(() => {
     div.classList.add("exploding-bubble");
     div.classList.add("explode");

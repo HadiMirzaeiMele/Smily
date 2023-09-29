@@ -35,7 +35,7 @@ function startGame() {
     id = setInterval(frame, 30);
     clearInterval(id2);
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
-    myBackgroundMacker0();
+   // myBackgroundMaker0();
 
 
 }
@@ -120,7 +120,7 @@ function frame() {
     elem.style.left =posX + 'px'; 
 
     hiTheButton();
-    hitTheTop();
+ 
 
 }
 function hiTheButton() {
@@ -129,9 +129,7 @@ function hiTheButton() {
       gravitySpeedY=-(gravitySpeedY*bounceBack);
    }  
 }
-function hitTheTop(){
-  
-}
+
 
 function collistion(){
   var collision=false;
@@ -154,14 +152,14 @@ function collistion(){
   }
   
 }
-function myBackgroundMacker0(){
+function myBackgroundMaker0(){
   
   var bubbleObj = new Bubble(100,500);
   bubbleObj.draw(0);
-  id3 = setInterval(myBackgroundMacker, 5000);
+  id3 = setInterval(myBackgroundMaker, 5000);
 }
 
-function myBackgroundMacker(){
+function myBackgroundMaker(){
 
   for(var i =1;i<numberOfBubbles;i++){
     var center_x;
@@ -258,6 +256,7 @@ function removeFromList(listOfBubbles,bubble){
 
 var numberOfBubbles = 10;
 var isBubbleExplodedByHisOwn=false;
+var  id4;
 class Bubble{
 constructor(center_x,center_y,radius,type){
   this.center_x = center_x;
@@ -274,6 +273,9 @@ draw(type){
   div.style.left = this.center_x + 'px';
   div.style.top =  this.center_y + 'px';
   document.body.appendChild(div);
+  const intervalDuration = 2000;
+  id4 = setInterval(() => this.exit(), intervalDuration); 
+
   if(isBubbleExplodedByHisOwn){
 
   setTimeout(() => {
@@ -286,6 +288,22 @@ draw(type){
 }, 5000);
 
   }
+}
+
+exit() {
+  // Access properties of the class instance using 'this'
+ console.log(`Exiting bubble at (${this.center_x}, ${this.center_y})`);
+
+  // Implement the logic for what should happen on each interval here
+  // For example, you can remove the 'div' element
+  // if(this.center_y<50){
+  // if (this.div) {
+  //   this.div.remove();
+  //   console.log("remove");
+  // }
+  // }
+  // Don't forget to clear the interval if needed
+ // clearInterval(id4);
 }
 }
 

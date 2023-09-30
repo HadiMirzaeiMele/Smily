@@ -256,25 +256,27 @@ function removeFromList(listOfBubbles,bubble){
 
 var numberOfBubbles = 10;
 var isBubbleExplodedByHisOwn=false;
-var  id4;
+
 class Bubble{
-constructor(center_x,center_y,radius,type){
+constructor(center_x,center_y,radius,type,exitTimer){
   this.center_x = center_x;
   this.center_y = center_y;
   this.radius = radius;
   this.type = type;
+  this.timer=exitTimer;
 }
 
 draw(type){
   const div = document.createElement('div');
   div.id=this.center_x +this.center_y+"";
+  console.log(div.id);
   div.className = 'bubble';
   div.classList.add("x"+type);
   div.style.left = this.center_x + 'px';
   div.style.top =  this.center_y + 'px';
   document.body.appendChild(div);
   const intervalDuration = 2000;
-  id4 = setInterval(() => this.exit(), intervalDuration); 
+  this.timer = setInterval(() => this.exit(), intervalDuration); 
 
   if(isBubbleExplodedByHisOwn){
 
@@ -292,8 +294,24 @@ draw(type){
 
 exit() {
   // Access properties of the class instance using 'this'
- console.log(`Exiting bubble at (${this.center_x}, ${this.center_y})`);
-
+ //console.log(`Exiting bubble at (${this.center_x}, ${this.center_y})`);
+ var thisElement= document.getElementById(this.center_x +this.center_y+"");
+ console.log(`re`);
+ if(thisElement){
+ var rect = thisElement.getBoundingClientRect();
+ console.log(`Exiting bubble at (${this.center_x}, ${this.center_y},${rect.y},${rect.x})`);
+ 
+  if(rect.y<30){
+    thisElement.classList.add("exploding-bubble");
+    thisElement.classList.add("explode");
+    thisElement.remove(); // Remove the exploded bubble
+    //document.body.removeChild(thisElement);
+    console.log("removed");
+      
+ clearInterval(this.timer);
+  }
+ 
+}
   // Implement the logic for what should happen on each interval here
   // For example, you can remove the 'div' element
   // if(this.center_y<50){
@@ -303,7 +321,7 @@ exit() {
   // }
   // }
   // Don't forget to clear the interval if needed
- // clearInterval(id4);
+
 }
 }
 

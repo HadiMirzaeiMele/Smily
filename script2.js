@@ -35,7 +35,7 @@ function startGame() {
     id = setInterval(frame, 30);
     clearInterval(id2);
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
-   // myBackgroundMaker0();
+    myBackgroundMaker0();
 
 
 }

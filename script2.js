@@ -299,9 +299,9 @@ exit() {
  console.log(`re`);
  if(thisElement){
  var rect = thisElement.getBoundingClientRect();
- console.log(`Exiting bubble at (${this.center_x}, ${this.center_y},${rect.y},${rect.x})`);
+// console.log(`Exiting bubble at (${this.center_x}, ${this.center_y},${rect.y},${rect.x})`);
  
-  if(rect.y<30){
+  if(rect.y<200){
     thisElement.classList.add("exploding-bubble");
     thisElement.classList.add("explode");
     thisElement.remove(); // Remove the exploded bubble

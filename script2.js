@@ -4,7 +4,7 @@ var elem = document.getElementById("bubbleId");
 var id = null;
 var id2 = null;
 var id3 = null;
-
+var  showMainBubble=false;
 var posY = 0;
 var posX = 0;
 
@@ -26,19 +26,23 @@ window.onload = function() {
   startGame();
  }
 var currentWidth,currentHeight;
+
 function startGame() {
     console.log("stargame");
 
-
-
+    if(showMainBubble){
+      var mainBubble=document.getElementById("bubbleId");
+      mainBubble.classList.add("bubble");
     clearInterval(id);
     id = setInterval(frame, 30);
-    clearInterval(id2);
+     clearInterval(id2);
+    }
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
     myBackgroundMaker0();
 
 
 }
+
 var radius=100;
 function ResponsiveAnimationFrame(){
   var r = document.querySelector(':root');
@@ -51,6 +55,7 @@ function ResponsiveAnimationFrame(){
   y = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
   currentWidth=x;
   currentHeight=y;
+  if(showMainBubble){
   if(x>maxWidth1) {
     currentHeight=y-120;
     radius=100;
@@ -66,7 +71,7 @@ function ResponsiveAnimationFrame(){
     r.style.setProperty('--borderRight2', '5px');
     r.style.setProperty('--blur', '4px');
     r.style.setProperty('--blur2', '6px');
-  }else   if(x>maxWidth2 ){
+  }else  if(x>maxWidth2 ){
     currentHeight=y-60;
     radius=50;
     r.style.setProperty('--width', '50px');
@@ -82,6 +87,7 @@ function ResponsiveAnimationFrame(){
     r.style.setProperty('--blur', '2px');
     r.style.setProperty('--blur2', '3px');
   }
+}
 }
 
 function move(dir) {

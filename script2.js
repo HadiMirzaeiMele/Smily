@@ -39,10 +39,18 @@ function startGame() {
     }
     id2 = setInterval(ResponsiveAnimationFrame, 1000);
     myBackgroundMaker0();
-
+    drawAbstacles(100,100);
 
 }
-
+function drawAbstacles(center_x,center_y){
+  const div = document.createElement('div');
+  div.id=center_x +"_"+center_y+"";
+  console.log(div.id);
+  div.className = 'rectangle';
+  // div.style.left = 100 + 'px';
+  // div.style.top =  500 + 'px';
+  document.body.appendChild(div);
+}
 var radius=100;
 function ResponsiveAnimationFrame(){
   var r = document.querySelector(':root');
@@ -274,7 +282,7 @@ constructor(center_x,center_y,radius,type,exitTimer){
 
 draw(type){
   const div = document.createElement('div');
-  div.id=this.center_x +this.center_y+"";
+  div.id=this.center_x +"_"+this.center_y+"";
   console.log(div.id);
   div.className = 'bubble';
   div.classList.add("x"+type);
@@ -301,7 +309,7 @@ draw(type){
 exit() {
   // Access properties of the class instance using 'this'
  //console.log(`Exiting bubble at (${this.center_x}, ${this.center_y})`);
- var thisElement= document.getElementById(this.center_x +this.center_y+"");
+ var thisElement= document.getElementById(this.center_x +"_"+this.center_y+"");
  console.log(`re`);
  if(thisElement){
  var rect = thisElement.getBoundingClientRect();
